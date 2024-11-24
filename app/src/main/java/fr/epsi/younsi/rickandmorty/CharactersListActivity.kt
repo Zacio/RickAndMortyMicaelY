@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 
 class MainActivity : ComponentActivity() {
@@ -149,7 +150,7 @@ fun CharacterDetailsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(character.name) }, // Nom du personnage comme titre
+                title = { Text(character.name) }, // name
                 navigationIcon = {
                     IconButton(onClick = onBackClick) { // Bouton retour
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -167,7 +168,7 @@ fun CharacterDetailsScreen(
         ) {
             // Image
             Image(
-                painter = rememberImagePainter(data = character.image),
+                painter = rememberAsyncImagePainter(model = character.image),
                 contentDescription = character.name,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -184,11 +185,29 @@ fun CharacterDetailsScreen(
                 text = "Species: ${character.species}",
                 style = MaterialTheme.typography.bodyLarge
             )
-            // Genre
+            // type
+            Text(
+                text = "Gender: ${character.type}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            // Type
             Text(
                 text = "Gender: ${character.gender}",
                 style = MaterialTheme.typography.bodyLarge
             )
+            Text(
+                text = "origin: ${character.origin.name}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = "location: ${character.location.name}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = "created: ${character.created}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+
         }
     }
 }
